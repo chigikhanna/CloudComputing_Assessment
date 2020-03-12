@@ -118,8 +118,8 @@ public class Tasks extends Thread {
 				}
 			}
 			br.close();
-			for (Map.Entry<String, Integer> entry : passengerCount.entrySet()) {
-				log(entry.getKey() + ": " + entry.getValue(), fw);
+			for (Map.Entry<String, Integer> x : passengerCount.entrySet()) {
+				log(x.getKey() + ": " + x.getValue(), fw);
 				log(ls, fw);
 			}
 		} catch (IOException e) {
