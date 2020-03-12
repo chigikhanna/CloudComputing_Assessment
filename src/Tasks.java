@@ -36,8 +36,8 @@ public class Tasks extends Thread {
 			br.close();
 
 			// Write output to file
-			for (Entry<String, Integer> entry : simpleMap.entrySet()) {
-				log(entry.getKey() + " : " + entry.getValue(), fw);
+			for (Entry<String, Integer> x : simpleMap.entrySet()) {
+				log(x.getKey() + " : " + x.getValue(), fw);
 				log(System.getProperty("line.separator"), fw);
 			}
 
@@ -84,10 +84,10 @@ public class Tasks extends Thread {
 			br.close();
 			log(ls, fw);
 			// Reduce
-			for (Map.Entry<String, List<Flight_mapper>> entry : flights.entrySet()) {
-				log(entry.getKey(), fw);
+			for (Map.Entry<String, List<Flight_mapper>> x : flights.entrySet()) {
+				log(x.getKey(), fw);
 				log(ls, fw);
-				for (Flight_mapper detail : entry.getValue()) {
+				for (Flight_mapper detail : x.getValue()) {
 					log(detail.toString(), fw);
 					log(ls, fw);
 				}
@@ -156,8 +156,8 @@ public class Tasks extends Thread {
 			// Reduce
 			TreeMap<String, Double> distances = new TreeMap<String, Double>();
 			
-			for (Map.Entry<String, List<Flight_mapper>> entry : flights.entrySet()) {
-				for (Flight_mapper aFlight : entry.getValue()) {
+			for (Map.Entry<String, List<Flight_mapper>> x : flights.entrySet()) {
+				for (Flight_mapper aFlight : x.getValue()) {
 					try {
 						double x1 = ((Airport_mapper) airports.get(aFlight.getFrom())).getLat();
 						double y1 = ((Airport_mapper) airports.get(aFlight.getFrom())).getLon();
@@ -166,7 +166,7 @@ public class Tasks extends Thread {
 
 						double distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 						 // Save each distance in a map
-						distances.put(entry.getKey(), distance);
+						distances.put(x.getKey(), distance);
 						
 					} catch (Exception e) {
 						log("Couldn't calculate a distance for flight " + aFlight.getFrom() + " to " + aFlight.getTo() + ".", fw);
@@ -176,11 +176,11 @@ public class Tasks extends Thread {
 			}
 			// Reduce Flight ID distances to one record of distance only.
 			Map<String, Double> reducer = new TreeMap<String, Double>();
-			for (Map.Entry<String, Double> entry : distances.entrySet()) {
-				reducer.put(entry.getKey(), entry.getValue());
+			for (Map.Entry<String, Double> x : distances.entrySet()) {
+				reducer.put(x.getKey(), x.getValue());
 			}
-			for (Map.Entry<String, Double> entry : reducer.entrySet()) {
-				log(entry.getKey() + " -> " + Math.round(entry.getValue()) + " miles.", fw);
+			for (Map.Entry<String, Double> x : reducer.entrySet()) {
+				log(x.getKey() + " -> " + Math.round(x.getValue()) + " miles.", fw);
 				log(ls, fw);
 			
 			}
@@ -201,8 +201,8 @@ public class Tasks extends Thread {
 					}
 			}
 			
-			for (Map.Entry<String, Double> entry : passengerDistance.entrySet()) {
-				log(entry.getKey() + " -> " + Math.round(entry.getValue()) + " miles.", fw);
+			for (Map.Entry<String, Double> x : passengerDistance.entrySet()) {
+				log(x.getKey() + " -> " + Math.round(x.getValue()) + " miles.", fw);
 				log(ls, fw);
 			}
 		} catch (IOException e) {
