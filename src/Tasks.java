@@ -205,6 +205,20 @@ public class Tasks extends Thread {
 				log(x.getKey() + " -> " + Math.round(x.getValue()) + " miles.", fw);
 				log(ls, fw);
 			}
+			//Max distance travelled by a passenger
+			log("---------------------------------------\n", fw);
+			
+			Double dist = 0.0;
+			String id = "";
+			for (Map.Entry<String, Double> x : passengerDistance.entrySet()) {
+				if(x.getValue() > dist)
+				{
+					dist = x.getValue();
+					id = x.getKey();
+				}
+			}
+			log("Passenger with maximum air miles is -> " + id + " with " + Math.round(dist) + " miles.", fw);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
