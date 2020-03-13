@@ -27,7 +27,7 @@ public class Flight_mapper {
 	private String unixToHHMMSS(String unixTime){
 		int temp = flightTime * 60000;
 		long unixSeconds = Long.parseLong(unixTime);
-		Date date = new Date((unixSeconds*1000L) + temp); // secs to millisecs 
+		Date date = new Date((unixSeconds*1000L) + temp); // secs to millisecs
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); // Date Format
 //		date = date.getMinutes() + flightTime;
 		String formattedDate = sdf.format(date);

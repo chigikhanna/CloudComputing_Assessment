@@ -14,8 +14,8 @@ public class Tasks extends Thread {
 
 	public static void task1() {
 		TreeMap<String, Integer> simpleMap = new TreeMap<String, Integer>();
-		log("•	Determine the number of flights from each airport; include a list of any airports not used.\n", fw);
-		log("---------------------------------\n", fw);
+		store("•	Determine the number of flights from each airport; include a list of any airports not used.\n", fw);
+		store("---------------------------------\n", fw);
 		try {
 			// Read input
 			BufferedReader br = new BufferedReader(new FileReader(Passenger));
@@ -37,20 +37,20 @@ public class Tasks extends Thread {
 
 			// Write output to file
 			for (Entry<String, Integer> x : simpleMap.entrySet()) {
-				log(x.getKey() + " : " + x.getValue(), fw);
-				log(System.getProperty("line.separator"), fw);
+				store(x.getKey() + " : " + x.getValue(), fw);
+				store(System.getProperty("line.separator"), fw);
 			}
 
 			System.out.println("");
-			log("Unused airports (" + unMatchedAirports.size() + "): " + System.getProperty("line.separator"), fw);
+			store("Unused airports (" + unMatchedAirports.size() + "): " + System.getProperty("line.separator"), fw);
 			for (String airport : unMatchedAirports) {
 				if (!simpleMap.containsKey(airport)) {
-					log(airport + ", ", fw);
+					store(airport + ", ", fw);
 					
 				}
 			}
 
-			log(System.getProperty("line.separator"), fw);
+			store(System.getProperty("line.separator"), fw);
 
 			
 		} catch (IOException e) {
@@ -62,8 +62,8 @@ public class Tasks extends Thread {
 
 	public static void task2() {
 		// Map
-		log("•	Create a list of flights based on the Flight id, this output should include the passenger Id, relevant IATA/FAA codes, the departure time, the arrival time (times to be converted to HH:MM:SS format), and the flight times.\n", fw);
-		log("---------------------------------\n", fw);
+		store("•	Create a list of flights based on the Flight id, this output should include the passenger Id, relevant IATA/FAA codes, the departure time, the arrival time (times to be converted to HH:MM:SS format), and the flight times.\n", fw);
+		store("---------------------------------\n", fw);
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(Passenger));
 			String line;
@@ -82,16 +82,16 @@ public class Tasks extends Thread {
 				}
 			}
 			br.close();
-			log(ls, fw);
+			store(ls, fw);
 			// Reduce
 			for (Map.Entry<String, List<Flight_mapper>> x : flights.entrySet()) {
-				log(x.getKey(), fw);
-				log(ls, fw);
+				store(x.getKey(), fw);
+				store(ls, fw);
 				for (Flight_mapper detail : x.getValue()) {
-					log(detail.toString(), fw);
-					log(ls, fw);
+					store(detail.toString(), fw);
+					store(ls, fw);
 				}
-				log(ls, fw);
+				store(ls, fw);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -99,9 +99,9 @@ public class Tasks extends Thread {
 	}
 
 	public static void task3() {
-		log("•	Calculate the number of passengers on each flight.\n", fw);
-		log("Passenger Count"+ls, fw);
-		log("---------------------------------"+ls, fw);
+		store("•	Calculate the number of passengers on each flight.\n", fw);
+		store("Passenger Count"+ls, fw);
+		store("---------------------------------"+ls, fw);
 		// MapReduce
 		try {
 			TreeMap<String, Integer> passengerCount = new TreeMap<String, Integer>();
@@ -119,8 +119,8 @@ public class Tasks extends Thread {
 			}
 			br.close();
 			for (Map.Entry<String, Integer> x : passengerCount.entrySet()) {
-				log(x.getKey() + ": " + x.getValue(), fw);
-				log(ls, fw);
+				store(x.getKey() + ": " + x.getValue(), fw);
+				store(ls, fw);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -129,10 +129,10 @@ public class Tasks extends Thread {
 
 	public static void task4() {
 		// Reduce each passenger to be combined (in case some passengers have more than one flight)
-		log("•	Calculate the line-of-sight (nautical) miles for each flight and the total travelled by each passenger and thus output the passenger having earned the highest air miles.\n", fw);
-		log(ls, fw);
-		log("Distance Travelled Per Flight"+ls, fw);
-		log("---------------------------------", fw);
+		store("•	Calculate the line-of-sight (nautical) miles for each flight and the total travelled by each passenger and thus output the passenger having earned the highest air miles.\n", fw);
+		store(ls, fw);
+		store("Distance Travelled Per Flight"+ls, fw);
+		store("---------------------------------", fw);
 		// Map
 		try {
 			TreeMap<String, Airport_mapper> airports = new TreeMap<String, Airport_mapper>();
@@ -152,7 +152,7 @@ public class Tasks extends Thread {
 				}
 			}
 			br.close();
-			log(ls, fw);
+			store(ls, fw);
 			// Reduce
 			TreeMap<String, Double> distances = new TreeMap<String, Double>();
 			
@@ -169,8 +169,8 @@ public class Tasks extends Thread {
 						distances.put(x.getKey(), distance);
 						
 					} catch (Exception e) {
-						log("Couldn't calculate a distance for flight " + aFlight.getFrom() + " to " + aFlight.getTo() + ".", fw);
-						log(ls, fw);
+						store("Couldn't calculate a distance for flight " + aFlight.getFrom() + " to " + aFlight.getTo() + ".", fw);
+						store(ls, fw);
 					}
 				}
 			}
@@ -180,14 +180,14 @@ public class Tasks extends Thread {
 				reducer.put(x.getKey(), x.getValue());
 			}
 			for (Map.Entry<String, Double> x : reducer.entrySet()) {
-				log(x.getKey() + " -> " + Math.round(x.getValue()) + " miles.", fw);
-				log(ls, fw);
+				store(x.getKey() + " -> " + Math.round(x.getValue()) + " miles.", fw);
+				store(ls, fw);
 			
 			}
 			
-			log(ls, fw);
-			log("Distance Travelled Per Passenger"+ls, fw);
-			log("---------------------------------"+ls, fw);
+			store(ls, fw);
+			store("Distance Travelled Per Passenger"+ls, fw);
+			store("---------------------------------"+ls, fw);
 			// Stored Key-Value pairs of passengers and distances travelled.
 			TreeMap<String, Double> passengerDistance = new TreeMap<String, Double>();
 			for (Map.Entry<String, List<Flight_mapper>> aFlight : flights.entrySet()) {
@@ -202,11 +202,11 @@ public class Tasks extends Thread {
 			}
 			
 			for (Map.Entry<String, Double> x : passengerDistance.entrySet()) {
-				log(x.getKey() + " -> " + Math.round(x.getValue()) + " miles.", fw);
-				log(ls, fw);
+				store(x.getKey() + " -> " + Math.round(x.getValue()) + " miles.", fw);
+				store(ls, fw);
 			}
 			//Max distance travelled by a passenger
-			log("---------------------------------------\n", fw);
+			store("---------------------------------------\n", fw);
 			
 			Double dist = 0.0;
 			String id = "";
@@ -217,7 +217,7 @@ public class Tasks extends Thread {
 					id = x.getKey();
 				}
 			}
-			log("Passenger with maximum air miles is -> " + id + " with " + Math.round(dist) + " miles.", fw);
+			store("Passenger with maximum air miles is -> " + id + " with " + Math.round(dist) + " miles.", fw);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -295,10 +295,10 @@ public class Tasks extends Thread {
 	}
 	
 	
-	public static void log(String toLog, FileWriter fw){
+	public static void store(String str, FileWriter fw){
 		try {
-			fw.write(toLog);
-			System.out.print(toLog);
+			fw.write(str);
+			System.out.print(str);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
