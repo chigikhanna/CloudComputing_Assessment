@@ -23,7 +23,7 @@ public class Tasks extends Thread {
 			ArrayList<String> unMatchedAirports = new ArrayList<String>();
 			while ((line = br.readLine()) != null) {
 				String[] split = line.split(",");
-				if (regexThis(split, 1)) {
+				if (regex(split, 1)) {
 					if (simpleMap.containsKey(split[2])) {
 						simpleMap.put(split[2], simpleMap.get(split[2]) + 1); // calculate number of flights from each airport
 					} else {
@@ -69,7 +69,7 @@ public class Tasks extends Thread {
 			String line;
 			while ((line = br.readLine()) != null) {
 				String[] split = line.split(",");
-				if (regexThis(split, 2)) {
+				if (regex(split, 2)) {
 					try {
 						if (flights.get(split[1]) == null) {
 							flights.put(split[1], new ArrayList<Flight_mapper>());
@@ -109,7 +109,7 @@ public class Tasks extends Thread {
 			String line;
 			while ((line = br.readLine()) != null) {
 				String[] split = line.split(",");
-				if (regexThis(split, 3)) {
+				if (regex(split, 3)) {
 					if (passengerCount.get(split[1]) == null) {
 						passengerCount.put(split[1], 1);
 					} else {
@@ -141,7 +141,7 @@ public class Tasks extends Thread {
 
 			while ((line = br.readLine()) != null) {
 				String[] split = line.split(",");
-				if (regexThis(split, 4)) {
+				if (regex(split, 4)) {
 					try {
 						if (airports.get(split[1]) == null) {
 							airports.put(split[1], new Airport_mapper(split[1], split[2], split[3]));
@@ -267,7 +267,7 @@ public class Tasks extends Thread {
 	}
 	
 	//File Cleaning
-	private static boolean regexThis(String[] split, int task) {
+	private static boolean regex(String[] split, int task) {
 		switch (task) {
 		case 1:
 			if (split.length < 3)
